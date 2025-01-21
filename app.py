@@ -21,7 +21,7 @@ class SocketHandler(websocket.WebSocketHandler):
 
 class ApiHandler(web.RequestHandler):
 
-    @web.asynchronous
+    #@web.asynchronous
     def get(self, *args):
         self.finish()
         id = self.get_argument("id")
@@ -31,7 +31,7 @@ class ApiHandler(web.RequestHandler):
         for c in cl:
             c.write_message(data)
 
-    @web.asynchronous
+    #@web.asynchronous
     def post(self):
         pass
 
