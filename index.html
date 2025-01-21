@@ -85,7 +85,8 @@
   </div>
   <script>
     var host = window.location.host;
-    var ws = new WebSocket('ws://'+host+'/ws');
+    var wsproto = ( "https:" == window.location.protocol ) ? "wss" : "ws"
+    var ws = new WebSocket(wsproto+'://'+host+'/ws');
     var $message = $('#message');
 
     ws.onopen = function(){
