@@ -12,10 +12,12 @@ class SocketHandler(websocket.WebSocketHandler):
         return True
 
     def open(self):
+        print("opening websocket")
         if self not in cl:
             cl.append(self)
 
     def on_close(self):
+        print("closing websocket")
         if self in cl:
             cl.remove(self)
 
@@ -23,12 +25,14 @@ class ApiHandler(web.RequestHandler):
 
     #@web.asynchronous
     def get(self, *args):
+        print("handeling request: "+args)
         self.finish()
         id = self.get_argument("id")
         value = self.get_argument("value")
         data = {"id": id, "value" : value}
         data = json.dumps(data)
         for c in cl:
+            print("sending message to websocket")
             c.write_message(data)
 
     #@web.asynchronous
